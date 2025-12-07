@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact">
+    <section class="py-20">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-tech-surface p-8 rounded-2xl border border-gray-800 shadow-2xl">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-white">Initialize Communication</h2>
+                    <p class="text-gray-400 text-sm mt-2">Our team usually responds within 2 hours.</p>
+                </div>
+
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-mono text-gray-400 mb-1">IDENTIFIER / NAME</label>
+                            <input type="text" required class="w-full bg-tech-base border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-tech-accent transition-all" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-mono text-gray-400 mb-1">RETURN ADDRESS / EMAIL</label>
+                            <input type="email" required class="w-full bg-tech-base border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-tech-accent transition-all" placeholder="john@company.com">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono text-gray-400 mb-1">TRANSMISSION / MESSAGE</label>
+                        <textarea rows="4" required class="w-full bg-tech-base border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-tech-accent transition-all" placeholder="Describe your requirements..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity">
+                        SEND DATA
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[70] space-y-2 pointer-events-none"></div>
+
+    <script>
+        const form = document.getElementById('contact-form');
+        const container = document.getElementById('toast-container');
+
+        form?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Create Toast
+            const toast = document.createElement('div');
+            toast.className = "flex items-center w-full max-w-xs p-4 rounded-xl shadow-xl text-white pointer-events-auto bg-green-600/90 backdrop-blur-sm transition-all transform duration-500 translate-y-10 opacity-0";
+            toast.innerHTML = `
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+                <div class="text-sm font-semibold">Transmission Received</div>
+            `;
+            
+            container?.appendChild(toast);
+
+            // Animate In
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            });
+
+            // Remove
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-x-full');
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+
+            // Reset Form
+            (e.target as HTMLFormElement).reset();
+        });
+    </script>
+</Layout>
