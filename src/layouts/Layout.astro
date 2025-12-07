@@ -2,6 +2,9 @@
 import '../styles/global.css';
 const { title } = Astro.props;
 const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
+
+const link = (path: string) => `${base}${path}`.replace(/\/+/g, '/');
 ---
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -37,17 +40,17 @@ const currentPath = Astro.url.pathname;
     <nav class="fixed w-full z-50 bg-tech-base/90 backdrop-blur-md border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <a href="/" class="flex-shrink-0 cursor-pointer">
+                <a href={link("/")} class="flex-shrink-0 cursor-pointer">
                     <span class="font-mono text-2xl font-bold text-tech-accent neon-text">&lt;IT 11/&gt;</span>
                 </a>
                 
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="/" class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPath === "/" ? "text-tech-glow font-semibold" : "text-gray-300 hover:text-tech-glow"}`}>Home</a>
-                        <a href="/summary" class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPath === "/summary" ? "text-tech-glow font-semibold" : "text-gray-300 hover:text-tech-glow"}`}>Summary</a>
-                        <a href="/outputs" class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPath === "/outputs" ? "text-tech-glow font-semibold" : "text-gray-300 hover:text-tech-glow"}`}>Outputs</a>
-                        <a href="/about" class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPath === "/about" ? "text-tech-glow font-semibold" : "text-gray-300 hover:text-tech-glow"}`}>About</a>
-                        <a href="/contact" class={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${currentPath === "/contact" ? "bg-tech-accent text-white" : "border border-tech-accent text-tech-accent hover:bg-tech-accent hover:text-white"}`}>Contact Us</a>
+                        <a href={link("/")} class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPath === "/" ? "text-tech-glow font-semibold" : "text-gray-300 hover:text-tech-glow"}`}>Home</a>
+                        <a href={link("/summary")} class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPath === "/summary" ? "text-tech-glow font-semibold" : "text-gray-300 hover:text-tech-glow"}`}>Summary</a>
+                        <a href={link("/outputs")} class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPath === "/outputs" ? "text-tech-glow font-semibold" : "text-gray-300 hover:text-tech-glow"}`}>Outputs</a>
+                        <a href={link("/about")} class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPath === "/about" ? "text-tech-glow font-semibold" : "text-gray-300 hover:text-tech-glow"}`}>About</a>
+                        <a href={link("/contact")} class={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${currentPath === "/contact" ? "bg-tech-accent text-white" : "border border-tech-accent text-tech-accent hover:bg-tech-accent hover:text-white"}`}>Contact Us</a>
                     </div>
                 </div>
 
@@ -63,11 +66,11 @@ const currentPath = Astro.url.pathname;
 
         <div id="mobile-menu" class="hidden md:hidden bg-tech-surface border-b border-gray-700">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="/" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
-                <a href="/summary" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Summary</a>
-                <a href="/outputs" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Outputs</a>
-                <a href="/about" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
-                <a href="/contact" class="text-tech-accent font-bold block px-3 py-2 rounded-md text-base">Contact</a>
+                <a href={link("/")} class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href={link("/summary")} class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Summary</a>
+                <a href={link("/outputs")} class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Outputs</a>
+                <a href={link("/about")} class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href={link("/contact")} class="text-tech-accent font-bold block px-3 py-2 rounded-md text-base">Contact</a>
             </div>
         </div>
     </nav>
