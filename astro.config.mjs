@@ -3,6 +3,6 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
 	integrations: [tailwind()],
-	site: 'https://YOUR-USERNAME.github.io',
+	site: 'https://anagramiccoder.github.io',
 	base: '/it11website',
 });
